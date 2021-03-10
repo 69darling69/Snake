@@ -37,6 +37,9 @@ window = pygame.display.set_mode([width, height])
 # Создаем часы, чтобы ограничить частоту кадров. Если это не сделать, то игра будет работыть слишком быстро
 clock = pygame.time.Clock()
 
+# Шрифт для очков
+fontScore = pygame.font.SysFont('Arial', 26, bold=True)
+
 # Работаем в бесконечном цикле игры
 while True:
     # Заполняем фон черным цветом
@@ -46,6 +49,10 @@ while True:
         # Рисуем прямоугольники по координатам змейки и заданному размеру
         pygame.draw.rect(window, pygame.Color('green'), (coordinate[0], coordinate[1], size, size))
     pygame.draw.rect(window, pygame.Color('red'), (apple[0], apple[1], size, size))
+
+    # Рисуем очки
+    renderScore = fontScore.render('Score: ' + str(length-1), 1, pygame.Color('Orange'))
+    window.blit(renderScore, (5, 5))
 
     # Получаем все нажатые на данный момент кнопки
     keys = pygame.key.get_pressed()
@@ -80,12 +87,8 @@ while True:
         # И количество кадров в секунду -> скорость игры
         fps += 1
 
-    # Если мы вышли за рамки игрового поля
-    if x < 0 - size or x > width or y < 0 - size or y > height:
-        # Выход
-        break
-    # Если длина змейки не равна длине множества змейки (т.е. какая-то ячейка змейки повторилась дважды)
-    if len(snake) != len(set(snake)):
+    # Если мы вышли за рамки игрового поля или eсли длина змейки не равна длине множества змейки (т.е. какая-то ячейка змейки повторилась дважды)
+    if x < 0 - size or x > width or y < 0 - size or y > height or len(snake) != len(set(snake)):
         # Выход
         break
 
