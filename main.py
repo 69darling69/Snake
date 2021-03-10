@@ -42,6 +42,7 @@ while True:
     for coordinate in snake:
         # Рисуем прямоугольники по координатам змейки и заданному размеру
         pygame.draw.rect(window, pygame.Color('green'), (coordinate[0], coordinate[1], size, size))
+    pygame.draw.rect(window, pygame.Color('red'), (apple[0], apple[1], size, size))
 
     # Получаем все нажатые на данный момент кнопки
     keys = pygame.key.get_pressed()
@@ -61,6 +62,7 @@ while True:
 
     # Добавляем эту клетку, чтобы рисовать в ней змейку
     snake.append((x, y))
+    snake = snake[-length:]
 
     # Обновляем окно
     pygame.display.flip()
