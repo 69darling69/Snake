@@ -17,6 +17,9 @@ x, y = RandomPosition()
 # Положение яблока (сначала случайно)
 apple = RandomPosition()
 
+# Словарь куда можно двигаться
+dirs = {'up': True, 'down': True, 'left': True, 'right': True}
+
 # Длина змейки, изначально 1
 length = 1
 # Список всех мест, где была змейка
@@ -46,15 +49,19 @@ while True:
 
     # Получаем все нажатые на данный момент кнопки
     keys = pygame.key.get_pressed()
-    # Изменяем направление змейки по кнопкам
-    if keys[pygame.K_UP]:
+    # Изменяем направление змейки по кнопкам, если в эту сторону можно двигать и меняем разрешенные направления
+    if keys[pygame.K_UP] and dirs['up']:
         dx, dy = 0, -1
-    if keys[pygame.K_DOWN]:
+        dirs = {'up': True, 'down': False, 'left': True, 'right': True}
+    if keys[pygame.K_DOWN] and dirs['down']:
         dx, dy = 0, 1
-    if keys[pygame.K_LEFT]:
+        dirs = {'up': False, 'down': True, 'left': True, 'right': True}
+    if keys[pygame.K_LEFT] and dirs['left']:
         dx, dy = -1, 0
-    if keys[pygame.K_RIGHT]:
+        dirs = {'up': True, 'down': True, 'left': True, 'right': False}
+    if keys[pygame.K_RIGHT] and dirs['right']:
         dx, dy = 1, 0
+        dirs = {'up': True, 'down': True, 'left': False, 'right': True}
 
     # Перемещаем нашу змеку на dx и dy
     x += dx * size
