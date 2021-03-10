@@ -59,7 +59,7 @@ while True:
         apple = RandomPosition()
         length += 1
         fps += 1
-    print(x, y)
+        
     if x < 0 or x > width-size or y < 0 or y > height-size or len(snake) != len(set(snake)):
         x, y = RandomPosition()
         apple = RandomPosition()
