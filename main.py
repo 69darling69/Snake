@@ -47,7 +47,7 @@ while True:
     # Проходимся по всему списку змейки
     for coordinate in snake:
         # Рисуем прямоугольники по координатам змейки и заданному размеру
-        pygame.draw.rect(window, pygame.Color('green'), (coordinate[0], coordinate[1], size, size))
+        pygame.draw.rect(window, pygame.Color('green'), (coordinate[0], coordinate[1], size-1, size-1))
     pygame.draw.rect(window, pygame.Color('red'), (apple[0], apple[1], size, size))
 
     # Рисуем очки
