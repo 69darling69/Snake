@@ -51,7 +51,7 @@ while True:
     pygame.draw.rect(window, pygame.Color('red'), (apple[0], apple[1], size, size))
 
     # Рисуем очки
-    renderScore = fontScore.render('Score: ' + str(length-1), 1, pygame.Color('Orange'))
+    renderScore = fontScore.render('Очки: ' + str(length-1), 1, pygame.Color('Orange'))
     window.blit(renderScore, (5, 5))
 
     # Получаем все нажатые на данный момент кнопки
@@ -89,8 +89,19 @@ while True:
 
     # Если мы вышли за рамки игрового поля или eсли длина змейки не равна длине множества змейки (т.е. какая-то ячейка змейки повторилась дважды)
     if x < 0 - size or x > width or y < 0 - size or y > height or len(snake) != len(set(snake)):
-        # Выход
-        break
+        # Проигрыш
+        # Рендерим надпись
+        renderEnd = fontScore.render('ИГРА ОКОНЧЕНА', 1, pygame.Color('orange'))
+        # Выводим ее по центру
+        window.blit(renderEnd, (width//2-renderEnd.get_size()[0]//2, height//2-renderEnd.get_size()[1]//2))
+        # Обновляем экран
+        pygame.display.flip()
+        # Проходимся в цикле по всем событиям, которые произошли в этот кадр
+        for event in pygame.event.get():
+        # Если есть событие с типом "выйти"
+            if event.type == pygame.QUIT:
+                # Выйти из игры
+                exit()
 
     # Обновляем окно
     pygame.display.flip()
