@@ -90,18 +90,14 @@ while True:
     # Если мы вышли за рамки игрового поля или eсли длина змейки не равна длине множества змейки (т.е. какая-то ячейка змейки повторилась дважды)
     if x < 0 - size or x > width or y < 0 - size or y > height or len(snake) != len(set(snake)):
         # Проигрыш
-        # Рендерим надпись
-        renderEnd = fontScore.render('ИГРА ОКОНЧЕНА', 1, pygame.Color('orange'))
-        # Выводим ее по центру
-        window.blit(renderEnd, (width//2-renderEnd.get_size()[0]//2, height//2-renderEnd.get_size()[1]//2))
-        # Обновляем экран
-        pygame.display.flip()
-        # Проходимся в цикле по всем событиям, которые произошли в этот кадр
-        for event in pygame.event.get():
-        # Если есть событие с типом "выйти"
-            if event.type == pygame.QUIT:
-                # Выйти из игры
-                exit()
+        # Возвращаем все в начало
+        x, y = RandomPosition()
+        apple = RandomPosition()
+        dirs = {'up': True, 'down': True, 'left': True, 'right': True}
+        length = 1
+        snake = [(x, y)]
+        dx, dy = 0, 0
+        fps = 5
 
     # Обновляем окно
     pygame.display.flip()
